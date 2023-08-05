@@ -2,7 +2,7 @@
 
 import React from 'react';
 import LinhaLivro from '@/componentes/LinhaLivro'; // Assuming LinhaLivro is in the 'components' folder
-import { Livro } from '@/classes/modelo/Livro'; // Assuming Livro is the class for Book
+import  Livro  from '@/classes/modelo/Livro'; // Assuming Livro is the class for Book
 
 interface LivroListaProps {
   livros: Livro[];

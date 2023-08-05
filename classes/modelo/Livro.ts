@@ -1,6 +1,6 @@
 // Livro.ts
 
-export class Livro {
+export default class Livro {
   codigo: number;
   codEditora: number;
   título: string;
