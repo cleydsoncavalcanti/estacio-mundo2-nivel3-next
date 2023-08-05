@@ -9,16 +9,19 @@ const LinhaLivro = ({
   excluir,
 }: {
   livro: Livro;
-  excluir: () => void;
+  excluir: (codigo: number) => void;
 }) => {
   const controleEditora = new ControleEditora();
+  const handleExcluirClick = () => {
+    excluir(livro.codigo);
+  };
 
   return (
     <tr>
       <td>
         <div className="d-flex flex-column">
           {livro.título}
-          <button onClick={excluir} className="btn btn-danger">
+          <button onClick={handleExcluirClick} className="btn btn-danger">
             Excluir
           </button>
         </div>
@@ -26,9 +29,6 @@ const LinhaLivro = ({
       <td>{livro.resumo}</td>
       <td>{controleEditora.getNomeEditora(livro.codEditora)}</td>
       <td>{livro.autores.join(", ")}</td>
-      <td>
-        <button onClick={excluir}>Excluir</button>
-      </td>
     </tr>
   );
 };

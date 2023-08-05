@@ -31,6 +31,8 @@ const LivroLista = () => {
   const handleExcluir = (codigo: number) => {
     // Implement the logic to handle book deletion here
     console.log(`Book with code ${codigo} will be deleted.`);
+    controleLivro.excluir(codigo);
+    setCarregado(false);
   };
 
   return (
