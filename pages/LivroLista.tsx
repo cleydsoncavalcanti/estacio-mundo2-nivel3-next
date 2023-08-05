@@ -1,14 +1,31 @@
 // LivroLista.tsx
+import React, { useState, useEffect } from "react";
+import LinhaLivro from "@/componentes/LinhaLivro"; // Assuming LinhaLivro is in the 'components' folder
+import ControleLivro from "@/classes/controle/ControleLivros";
 
-import React from 'react';
-import LinhaLivro from '@/componentes/LinhaLivro'; // Assuming LinhaLivro is in the 'components' folder
-import  Livro  from '@/classes/modelo/Livro'; // Assuming Livro is the class for Book
+const LivroLista = () => {
+  const [livros, setLivros] = useState([
+    {
+      codigo: 0,
+      codEditora: 0,
+      título: "",
+      resumo: "",
+      autores: [""],
+    },
+  ]);
+  const [carregado, setCarregado] = useState(false);
+  const controleLivro = new ControleLivro();
 
-interface LivroListaProps {
-  livros: Livro[];
-}
+  useEffect(() => {
+    const obterLivros = async () => {
+      const listaLivros = controleLivro.obterLivros();
+      setLivros(listaLivros);
+      setCarregado(true);
+    };
 
-const LivroLista: React.FC<LivroListaProps> = ({ livros }) => {
+    obterLivros();
+  }, [carregado]);
+
   const handleExcluir = (codigo: number) => {
     // Implement the logic to handle book deletion here
     console.log(`Book with code ${codigo} will be deleted.`);
@@ -20,7 +37,11 @@ const LivroLista: React.FC<LivroListaProps> = ({ livros }) => {
       <table>
         <tbody>
           {livros.map((livro) => (
-            <LinhaLivro key={livro.codigo} livro={livro} excluir={() => handleExcluir(livro.codigo)} />
+            <LinhaLivro
+              key={livro.codigo}
+              livro={livro}
+              excluir={() => handleExcluir(livro.codigo)}
+            />
           ))}
         </tbody>
       </table>
