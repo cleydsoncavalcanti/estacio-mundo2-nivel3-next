@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import LinhaLivro from "@/componentes/LinhaLivro"; // Assuming LinhaLivro is in the 'components' folder
 import ControleLivro from "@/classes/controle/ControleLivros";
 
+import Menu from "@/componentes/Menu";
+
 const LivroLista = () => {
   const [livros, setLivros] = useState([
     {
@@ -32,20 +34,31 @@ const LivroLista = () => {
   };
 
   return (
-    <div>
-      <h1>List of Books</h1>
-      <table>
-        <tbody>
-          {livros.map((livro) => (
-            <LinhaLivro
-              key={livro.codigo}
-              livro={livro}
-              excluir={() => handleExcluir(livro.codigo)}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <Menu />
+      <div className="container mt-3">
+        <h1>Catálogo de Livros</h1>
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th>Título</th>
+              <th>Resumo</th>
+              <th>Editora</th>
+              <th>Autores</th>
+            </tr>
+          </thead>
+          <tbody>
+            {livros.map((livro) => (
+              <LinhaLivro
+                key={livro.codigo}
+                livro={livro}
+                excluir={() => handleExcluir(livro.codigo)}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
